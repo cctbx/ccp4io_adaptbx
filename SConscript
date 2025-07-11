@@ -50,8 +50,9 @@ def replace_printf(file_name):
 
 env = env_base.Clone(
   SHLINKFLAGS=env_etc.shlinkflags)
-if sys.platform == 'darwin':
-  env.Append(CFLAGS=['-Wno-error=implicit-function-declaration'])
+if sys.platform == 'darwin' or sys.platform.startswith('linux'):
+  env.Append(CFLAGS=['-Wno-implicit-function-declaration',
+                     '-Wno-incompatible-pointer-types'])
 env.Append(CCFLAGS=env_etc.ccp4io_defines)
 env.Append(SHCCFLAGS=env_etc.ccp4io_defines)
 env_etc.include_registry.append(
